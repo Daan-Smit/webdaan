@@ -15,6 +15,7 @@
             </div>
         </div>
     </div>
+    <img src="images/logos/color-no-bg.png" alt="">
 <?php
     include 'main/footer.php';
 ?>
