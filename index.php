@@ -16,7 +16,7 @@
         </div>
     </div>
     <?= dirname(__FILE__) . '/images/logos/color-no-bg.png'?>
-    <img src="" alt="">
+    <img src="<?= dirname(__FILE__) . '/images/logos/color-no-bg.png'?>" alt="doet niet">
 <?php
     include 'main/footer.php';
 ?>
