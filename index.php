@@ -1,6 +1,7 @@
 <?php 
     include 'main/head.php';
     include 'main/header.php';
+    $_SESSION['path'] = __DIR__;
 ?>
     <div class="containter">
         <div class="row">

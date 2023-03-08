@@ -4,7 +4,6 @@
 
     <?php
         session_start();
-        $_SESSION['path'] = $_SERVER['DOCUMENT_ROOT'];
     ?>
 
     <meta charset="UTF-8">
