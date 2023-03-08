@@ -15,6 +15,7 @@
             </div>
         </div>
     </div>
+    <?= dirname(__FILE__) ?>
 <?php
     include 'main/footer.php';
 ?>
