@@ -15,6 +15,7 @@
             </div>
         </div>
     </div>
+    <?= $_SESSION['path'] ?><br>
     <?= dirname(__FILE__) . '/images/logos/color-no-bg.png'?>
     <img src="images/logos/color-no-bg.png" alt="doet niet">
 <?php
