@@ -6,7 +6,7 @@
         session_start();
         $parts = explode(DIRECTORY_SEPARATOR, dirname(__DIR__));
         $last = end($parts);
-        $path = DIRECTORY_SEPARATOR . $last . DIRECTORY_SEPARATOR;
+        $path = "\\" . $last . "\\";
     ?>
 
     <meta charset="UTF-8">
