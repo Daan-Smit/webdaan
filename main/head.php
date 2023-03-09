@@ -4,9 +4,9 @@
 
     <?php
         session_start();
-        $parts = explode(DIRECTORY_SEPARATOR, dirname(__DIR__));
-        $last = end($parts);
-        $path = DIRECTORY_SEPARATOR . $last . DIRECTORY_SEPARATOR;
+        // $parts = explode(DIRECTORY_SEPARATOR, dirname(__DIR__));
+        // $last = end($parts);
+        // $path = DIRECTORY_SEPARATOR . $last . DIRECTORY_SEPARATOR;
     ?>
 
     <meta charset="UTF-8">
@@ -14,10 +14,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="https://webdaan.nl/images/favicons/color-no-bg.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="https://webdaan.nl/images/favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="https://webdaan.nl/images/favicons/favicon-16x16.png">
-    <link rel="manifest" href="https://webdaan.nl/images/favicons/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="./images/favicons/color-no-bg.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/favicons/favicon-16x16.png">
+    <link rel="manifest" href="./images/favicons/site.webmanifest">
 
     <!-- Title of site -->
     <title>WebDaan</title>
@@ -27,6 +27,5 @@
 
     <!-- CSS Files -->
     <link rel="stylesheet" href="./css/style.css">
-    <?php //echo $path . "/css/style.css"?>
 </head>
 <body>
