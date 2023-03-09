@@ -4,4 +4,4 @@
 include '../main/head.php';
 
 ?>
-test
+<h1>test</h1>
