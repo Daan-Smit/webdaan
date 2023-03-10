@@ -39,5 +39,6 @@
 
     <!-- CSS Files -->
     <link rel="stylesheet" href="<?= $path . 'css/style.css' ?>">
+    <link rel="stylesheet" href="<?= $path . 'css/custom.min.css' ?>">
 </head>
 <body>

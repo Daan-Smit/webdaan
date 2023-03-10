@@ -1,3 +1,3 @@
-<div class="navbar bg-primary">
+<div class="navbar bg-main">
   <h1>text</h1>
 </div>
