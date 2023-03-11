@@ -1,0 +1,30 @@
+.customLink {
+    color: #febc9b !important;
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+}
+
+.customLink:hover {
+    color: #7e3d1c !important;
+    text-decoration: none;
+}
+
+.customLink::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    color: #7e3d1c !important;
+    background-color: #7e3d1c;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+.customLink:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
