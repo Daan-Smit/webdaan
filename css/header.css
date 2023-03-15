@@ -1,12 +1,12 @@
 .customLink {
-    color: #febc9b !important;
+    color: #ffdac5 !important;
     text-decoration: none;
     display: inline-block;
     position: relative;
 }
 
 .customLink:hover {
-    color: #7e3d1c !important;
+    color: #a65a31 !important;
     text-decoration: none;
 }
 
@@ -18,8 +18,8 @@
     height: 2px;
     bottom: 0;
     left: 0;
-    color: #7e3d1c !important;
-    background-color: #7e3d1c;
+    color: #a65a31 !important;
+    background-color: #a65a31;
     transform-origin: bottom right;
     transition: transform 0.25s ease-out;
 }
@@ -27,4 +27,12 @@
 .customLink:hover::after {
     transform: scaleX(1);
     transform-origin: bottom left;
+}
+
+.navbar-toggler:focus,
+.navbar-toggler:active,
+.navbar-toggler-icon:focus {
+    outline: none;
+    border: none;
+    box-shadow: none;
 }

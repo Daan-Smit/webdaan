@@ -40,6 +40,7 @@
     <!-- CSS Files -->
     <link rel="stylesheet" href="<?= $path . 'css/style.css' ?>">
     <link rel="stylesheet" href="<?= $path . 'css/header.css' ?>">
+    <link rel="stylesheet" href="<?= $path . 'css/index.css' ?>">
     <link rel="stylesheet" href="<?= $path . 'css/custom.min.css' ?>">
 </head>
 <body>

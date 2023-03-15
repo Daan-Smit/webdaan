@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-main sticky-top">
+<nav class="navbar navbar-expand-lg sticky-top bg-main navbar-dark">
   <div class="container-fluid container-xl px-3 px-xl-0">
     <a class="navbar-brand" href="<?= $path ?>">
       <img src="<?= $path . 'images/logos/white-no-bg.png' ?>" height="50" class="d-inline-block align-top" alt="">
@@ -6,18 +6,18 @@
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav me-auto mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="#">Home</a>
+          <a class="nav-link customLink" href="<?= $path ?>">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
+          <a class="nav-link customLink" href="<?= $path . '' ?>">Portfolio</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
+          <a class="nav-link customLink" href="<?= $path . '' ?>">Recepten</a>
         </li>
       </ul>
     </div>
     <span class="navbar-nav d-none d-lg-block">
-      <a class="nav-link" href="#">Login</a>
+      <a class="nav-link customLink" href="<?= $path . '' ?>">Login</a>
     </span>
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar">
       <span class="navbar-toggler-icon"></span>
@@ -34,9 +34,11 @@
   <hr class="bg-main">
   <div class="offcanvas-body mx-3 mb-3">
     <div class="d-flex flex-column bd-highlight">
-      <a href="#" class="py-2 customLink">Content 1</a>
-      <a href="#" class="py-2 customLink">Content 2</a>
-      <a href="#" class="py-2 customLink">Content 3</a>
+      <a href="<?= $path ?>" class="py-2 customLink">Home</a>
+      <a href="<?= $path . '' ?>" class="py-2 customLink">Portfolio</a>
+      <a href="<?= $path . ''?>" class="py-2 customLink">Recepten</a>
+      <hr class="bg-main">
+      <a href="<?= $path . ''?>" class="py-2 customLink">Login</a>
     </div>
   </div>
 </div>
