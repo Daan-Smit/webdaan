@@ -2,7 +2,7 @@
     include 'main/head.php';
     include 'main/header.php';
 ?>
-    <div class="container-fluid" style="height: 100vh; width: 100%; background-size: cover; background-position:center; background-image: url('images/jumbotron-index.png'); box-shadow: inset 0 0 0 1000px rgba(255,150,80,0.15); ">
+    <div class="container-fluid" style="height: calc(100vh - 76px); width: 100%; background-size: cover; background-position:center; background-image: url('images/jumbotron-index.png'); box-shadow: inset 0 0 0 1000px rgba(255,150,80,0.15);">
         <div class="container px-4 px-lg-5 h-75">
             <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
                 <div class="col-lg-8 align-self-end">
@@ -19,8 +19,8 @@
                 </div>
             </div>
         </div>
-    </div>
-    
+    </div>   
+    <br> <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <?php
     include 'main/footer.php';
 ?>
