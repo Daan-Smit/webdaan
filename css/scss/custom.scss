@@ -2,7 +2,11 @@
 @import "../node_modules/bootstrap/scss/variables";
 
 $custom-theme-colors: (
-    "main": #FD7B33
+    "main": #FD7B33,
+    "maindark": #a65a31,
+    "lightblue": #8ecae6,
+    "midblue": #219ebc,
+    "darkblue": #023047
 );
 
 $theme-colors: map-merge($custom-theme-colors, $theme-colors);

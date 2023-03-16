@@ -9,11 +9,11 @@
                     <h1 class="text-white font-weight-bold">
                         Portfolio Daan Smit
                     </h1>
-                    <hr class="w-25 m-auto" style="border: 1px solid #FD7B33;">
+                    <hr class="w-25 m-auto" style="border: 1px solid #a65a31;">
                     <p class="text-white mb-5 mt-2">
                         Hallo, ik ben Daan en dit is mijn eerste website! Deze website wordt mijn portfolio, en omdat ik het erg leuk vind om te koken ga ik ook een systeem bouwen waarmee ik recepten kan maken en uitlezen. Alvast bedankt voor het bezoeken van WebDaan en kijk gerust verder!
                     </p>
-                    <a href="portfolio/index.php?id=2" class="btn btn-main text-white p-3 px-4 customIndexButton">
+                    <a href="portfolio/index.php?id=2" class="btn btn-maindark text-white p-3 px-4 roundedButton">
                         Meer bekijken!
                     </a>
                 </div>

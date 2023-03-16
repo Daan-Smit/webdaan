@@ -17,7 +17,9 @@
       </ul>
     </div>
     <span class="navbar-nav d-none d-lg-block">
-      <a class="nav-link customLink" href="<?= $path . '' ?>">Login</a>
+      <a href="portfolio/index.php?id=2" class="btn btn-maindark text-white px-4 roundedButton">
+          Login
+      </a>
     </span>
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar">
       <span class="navbar-toggler-icon"></span>
@@ -38,7 +40,9 @@
       <a href="<?= $path . '' ?>" class="py-2 customLink">Portfolio</a>
       <a href="<?= $path . ''?>" class="py-2 customLink">Recepten</a>
       <hr class="bg-main">
-      <a href="<?= $path . ''?>" class="py-2 customLink">Login</a>
+      <a href="portfolio/index.php?id=2" class="btn btn-maindark btn-block text-white px-4">
+          Login
+      </a>
     </div>
   </div>
 </div>
