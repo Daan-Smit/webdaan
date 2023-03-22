@@ -16,12 +16,37 @@
         </li>
       </ul>
     </div>
-    <span class="navbar-nav d-none d-lg-block">
-      <a href="portfolio/index.php?id=2" class="btn btn-maindark text-white px-4 roundedButton">
-          Login
-      </a>
-    </span>
-    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar">
+    
+    <?php
+      if (isset($_SESSION['userid'])) {
+        $userid = $_SESSION['userid']
+    ?>
+        <div class="dropdown d-none d-lg-block">
+          <button class="btn btn-secondary dropdown-toggle bg-transparent profile-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <div class="mr-5 d-inline-block">Welkom, <?= $_SESSION['firstname'] ?>&nbsp;&nbsp;<i class="fa-solid fa-user fa-lg"></i></div>
+            
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="<?= $path . 'login/profile.php?profile='?><?= $userid ?>">Profiel</a></li>
+            <li><a class="dropdown-item" href="<?= $path . '' ?>">Instellingen (concept)</a></li>
+            <li><a class="dropdown-item" href="<?= $path . '' ?>">Opgeslagen recepten (concept)</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="<?= $path . 'includes/login/logout.inc.php'?>">Uitloggen</a></li>
+          </ul>
+        </div>
+    <?php
+      } else {
+    ?>
+        <span class="navbar-nav d-none d-lg-block">
+          <a href="<?= $path . 'login/login.php'?>" class="btn btn-maindark text-white px-4 roundedButton">
+              Login
+          </a>
+        </span>
+    <?php
+      }
+    ?>
+    
+    <button class="navbar-toggler sidebar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
       <span class="navbar-toggler-icon"></span>
     </button>
   </div>
@@ -40,9 +65,33 @@
       <a href="<?= $path . '' ?>" class="py-2 customLink">Portfolio</a>
       <a href="<?= $path . ''?>" class="py-2 customLink">Recepten</a>
       <hr class="bg-main">
-      <a href="portfolio/index.php?id=2" class="btn btn-maindark btn-block text-white px-4">
-          Login
-      </a>
+
+      <?php
+        if (isset($_SESSION['userid'])) {
+          $userid = $_SESSION['userid'];
+      ?>
+          <div class="dropdown w-100">
+            <button class="btn btn-maindark dropdown-toggle btn-block text-white px-4 w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa-solid fa-user"></i>
+            </button>
+            <ul class="dropdown-menu w-100">
+              <li><a class="dropdown-item" href="<?= $path . 'login/profile.php?profile='?><?= $userid ?>">Profiel</a></li>
+              <li><a class="dropdown-item" href="<?= $path . '' ?>">Instellingen (concept)</a></li>
+              <li><a class="dropdown-item" href="<?= $path . '' ?>">Opgeslagen recepten (concept)</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="<?= $path . 'includes/login/logout.inc.php'?>">Uitloggen</a></li>
+            </ul>
+          </div>
+      <?php
+        } else {
+      ?>
+          <a href="<?= $path . 'login/login.php'?>" class="btn btn-maindark btn-block text-white px-4">
+            Login
+          </a>
+      <?php
+        }
+      ?>
+      
     </div>
   </div>
 </div>

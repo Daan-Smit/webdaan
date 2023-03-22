@@ -36,11 +36,16 @@
 
     <!-- Bootstrap link -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    
+
     <!-- CSS Files -->
     <link rel="stylesheet" href="<?= $path . 'css/style.css' ?>">
     <link rel="stylesheet" href="<?= $path . 'css/header.css' ?>">
     <link rel="stylesheet" href="<?= $path . 'css/index.css' ?>">
     <link rel="stylesheet" href="<?= $path . 'css/custom.min.css' ?>">
+
+    <!-- Fontawesome icons -->
+    <link rel="stylesheet" href="<?= $path . 'css/fa_font/css/brands.css' ?>">
+    <link rel="stylesheet" href="<?= $path . 'css/fa_font/css/fontawesome.css' ?>">
+    <link rel="stylesheet" href="<?= $path . 'css/fa_font/css/solid.css' ?>">
 </head>
 <body>
