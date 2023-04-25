@@ -2,21 +2,20 @@
 
 if (isset($_POST['submit'])) {
 
-    $firstname = $_POST['firstname'];
-    $middlename = $_POST['middlename'];
-    $lastname = $_POST['lastname'];
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $phonenumber = $_POST['phonenumber'];
-    $gender = $_POST['gender'];
-    $age = $_POST['age'];
-    $pwd = $_POST['pwd'];
-    $pwdRepeat = $_POST['pwdrepeat'];
+    session_start();
+
+    $firstname = $_SESSION['temp_firstname'] = htmlspecialchars($_POST['firstname']);
+    $middlename = $_SESSION['temp_middlename'] = htmlspecialchars($_POST['middlename']);
+    $lastname = $_SESSION['temp_lastname'] = htmlspecialchars($_POST['lastname']);
+    $username = $_SESSION['temp_username'] = htmlspecialchars($_POST['username']);
+    $email = $_SESSION['temp_email'] = htmlspecialchars($_POST['email']);
+    $pwd = htmlspecialchars($_POST['pwd']);
+    $pwdRepeat = htmlspecialchars($_POST['pwdrepeat']);
 
     require_once '../dbh.inc.php';
     require_once 'functions.inc.php';
 
-    if (emptyInputSignup($firstname, $lastname, $username, $email, $phonenumber, $gender, $age, $pwd, $pwdRepeat) !== false) {
+    if (emptyInputSignup($firstname, $lastname, $username, $email, $pwd, $pwdRepeat) !== false) {
         header("location: ../../login/signup.php?error=emptyinput");
         exit();
     }
@@ -26,18 +25,13 @@ if (isset($_POST['submit'])) {
         exit();
     }
 
+    if (uidExists($conn, $username, $email) !== false) {
+        header("location: ../../login/signup.php?error=usernametaken");
+        exit();
+    }
+
     if (invalidEmail($email) !== false) {
         header("location: ../../login/signup.php?error=invalidemail");
-        exit();
-    }
-
-    if (invalidPhoneNumber($phonenumber) !== false) {
-        header("location: ../../login/signup.php?error=invalidphonenumber");
-        exit();
-    }
-
-    if (invalidAge($age) !== false) {
-        header("location: ../../login/signup.php?error=invalidage");
         exit();
     }
 
@@ -46,14 +40,9 @@ if (isset($_POST['submit'])) {
         exit();
     }
 
-    if (uidExists($conn, $username, $email) !== false) {
-        header("location: ../../login/signup.php?error=usernametaken");
-        exit();
-    }
-
-    createUser($conn, $firstname, $middlename, $lastname, $username, $email, $phonenumber, $gender, $age, 1, $pwd);
+    createUser($conn, $firstname, $middlename, $lastname, $username, $email, 1, $pwd);
     
 } else {
-    header("location: ../../login/signup.php");
+    header("location: ../../index.php");
     exit();
 }

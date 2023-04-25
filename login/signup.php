@@ -5,59 +5,38 @@ include '../includes/dbh.inc.php';
 include '../includes/login/functions.inc.php';
 ?>
 
-<h2>Sign Up</h2>
-<form action="../includes/login/signup.inc.php" method="post">
-    <input type="text" id="firstname" name="firstname" placeholder="Voornaam..." autocomplete="off" value="">
-    <input type="text" name="middlename" placeholder="Tussenvoegsel..." autocomplete="off">
-    <input type="text" name="lastname" placeholder="Achternaam..." autocomplete="off">
-    <input type="text" name="username" placeholder="Username..." autocomplete="off">
-    <input type="text" name="email" placeholder="Email..." autocomplete="off">
-    <input type="date" name="dateofbirth" autocomplete="off">
-    <input type="text" name="phonenumber" placeholder="Phone number..." autocomplete="off">
-    <select name="gender" autocomplete="off">
-        <option selected disabled>--- Maak een keuze ---</option>
-        <?php
-            $resultData = getGenders($conn);
-            
-            while ($row = mysqli_fetch_assoc($resultData)) {
-                ?><option value="<?= $row['genderId'] ?>"><?= $row['genderName'] ?></option><?php
-            }
-        ?>
-    </select>
-    <input type="number" name="age" placeholder="Age..." autocomplete="off">
-    <input type="password" name="pwd" placeholder="Password..." autocomplete="off">
-    <input type="password" name="pwdrepeat" placeholder="Repeat password..." autocomplete="off">
-    <button type="submit" name="submit">Sign Up</button>
-</form>
+<div class="container">
+    <form action="../includes/login/signup.inc.php" method="post" id="signupForm">
+        <h2>Aanmelden</h2>
+
+        <input type="text" id="signupFirstname" name="firstname" placeholder="Voornaam..." autocomplete="off" value="<?= $_SESSION['temp_firstname'] ?? '' ?>">
+        <div id="signupFirstnameMsg"></div>
+
+        <input type="text" id="signupMiddlename" name="middlename" placeholder="Tussenvoegsel..." autocomplete="off" value="<?= $_SESSION['temp_middlename'] ?? '' ?>">
+        <div id="signupMiddlenameMsg"></div>
+
+        <input type="text" id="signupLastname" name="lastname" placeholder="Achternaam..." autocomplete="off" value="<?= $_SESSION['temp_lastname'] ?? '' ?>">
+        <div id="signupLastnameMsg"></div>
+
+        <input type="text" id="signupUsername" name="username" placeholder="Gebruikersnaam..." autocomplete="off" value="<?= $_SESSION['temp_username'] ?? '' ?>">
+        <div id="signupUsernameMsg"></div>
+
+        <input type="text" id="signupEmail" name="email" placeholder="Email..." autocomplete="off" value="<?= $_SESSION['temp_email'] ?? '' ?>">
+        <div id="signupEmailMsg"></div>
+
+        <input type="password" id="signupPwd" name="pwd" placeholder="Wachtwoord..." autocomplete="off">
+        <div id="signupPwdMsg"></div>
+
+        <input type="password" id="signupPwdRepeat" name="pwdrepeat" placeholder="Herhaal wachtwoord..." autocomplete="off">
+        <div id="signupPwdRepeatMsg"></div>
+
+        <button type="submit" name="submit">Aanmelden</button>
+        <a href="login.php">Ik heb al een account</a>
+    </form>
+    <div id="signupFormMsg"></div>
+</div>
+<script type="module" src="js/signup.js"></script>
 
 <?php
-if (isset($_GET['error'])) {
-    if ($_GET['error'] == 'emptyinput') {
-        echo "<p>Vul alle velden in!</p>";
-    }
-    else if ($_GET['error'] == 'invaliduid') {
-        echo "<p>Kies een geldige gebruikersnaam, je mag letters en cijfers gebruiken!</p>";
-    }
-    else if ($_GET['error'] == 'invalidemail') {
-        echo "<p>Kies een geldig e-mail address!</p>";
-    }
-    else if ($_GET['error'] == 'invalidphonenumber') {
-        echo "<p>Kies een geldig telefoonnummer!</p>";
-    }
-    else if ($_GET['error'] == 'invalidage') {
-        echo "<p>Je moet minimaal 14 jaar zijn om een account aan te maken!</p>";
-    }
-    else if ($_GET['error'] == 'nomatch') {
-        echo "<p>Wachtwoorden komen niet overeen!</p>";
-    }
-    else if ($_GET['error'] == 'stmtfailed') {
-        echo "<p>Er is iets fout gegaan, probeer het later opnieuw!</p>";
-    }
-    else if ($_GET['error'] == 'usernametaken') {
-        echo "<p>Gebruikersnaam bestaat al!</p>";
-    }
-    else if ($_GET['error'] == 'none') {
-        echo "<p>Je bent ingelogd!</p>";
-    }
-}
+include '../main/footer.php';
 ?>

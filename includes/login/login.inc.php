@@ -2,8 +2,10 @@
 
 if (isset($_POST['submit'])) {
 
-    $username = $_POST['name'];
-    $pwd = $_POST['pwd'];
+    session_start();
+
+    $username = $_SESSION['temp_login'] = htmlspecialchars($_POST['name']);
+    $pwd = htmlspecialchars($_POST['pwd']);
 
     require_once '../dbh.inc.php';
     require_once 'functions.inc.php';
@@ -13,9 +15,13 @@ if (isset($_POST['submit'])) {
         exit();
     }
 
+    if (!uidExists($conn, $username, $username)) {
+        header("location: ../../login/login.php?error=nouser");
+        exit();
+    }
+
     loginUser($conn, $username, $pwd);
-    echo 'test';
 } else {
-    header("location: ../../login/login.php");
+    header("location: ../../index.php");
     exit();
 }
