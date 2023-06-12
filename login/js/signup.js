@@ -1,72 +1,185 @@
-import * as func from './functions.js';
+import FromValidator from "../../js/FormValidator.js";
+import ServerValidator from "../../js/ServerValidator.js";
 
-// Initialize variables
-let elFirstname, elMiddlename, elLastname, elUsername, elEmail, elPwd, elPwdRepeat, elForm, urlError;
-elFirstname = document.getElementById('signupFirstname');
-elMiddlename = document.getElementById('signupMiddlename');
-elLastname = document.getElementById('signupLastname');
-elUsername = document.getElementById('signupUsername');
-elEmail = document.getElementById('signupEmail');
-elPwd = document.getElementById('signupPwd');
-elPwdRepeat = document.getElementById('signupPwdRepeat');
-elForm = document.getElementById('signupForm');
-urlError = func.checkUrl('error');
+// start of server validator
+const sv = new ServerValidator('error');
 
-// If there is a URL parameter first fill in these error messages
-if (urlError) {
-    // Get url param called 'error'
-    const url = window.location.search;
-    const urlParams = new URLSearchParams(url);
-    const errorName = urlParams.get('error');
-
-    // Set message depending on the error value
+sv.setError('#serverError', errorName => {
     if (errorName === 'emptyinput') {
-        func.setMsg('signupForm', 'error', 'Vul alle velden in!', urlError);
+        return {
+            pass: false,
+            error: "Vul alle velden in!"
+        };
     }
-    if (errorName === 'invaliduid') {
-        func.setMsg('signupUsername', 'error', 'Gebruik alleen letters, cijfers en - of _!', urlError);
+    if (errorName === 'nouser') {
+        return {
+            pass: false,
+            error: "Geen gebruiker gevonden!"
+        };
     }
-    if (errorName === 'usernametaken') {
-        func.setMsg('signupUsername', 'error', DOMPurify.sanitize(elUsername.value) + ' is al in gebruik!', urlError);
-    }
-    if (errorName === 'invalidemail') {
-        func.setMsg('signupEmail', 'error', DOMPurify.sanitize(elEmail.value) + ' is geen geldige e-mail!', urlError);
-    }
-    if (errorName === 'nomatch') {
-        func.setMsg('signupForm', 'error', 'Wachtwoorden komen niet overeen!', urlError);
+    if (errorName === 'wronglogin') {
+        return {
+            pass: false,
+            error: "Inlog gegevens zijn incorrect!"
+        };
     }
     if (errorName === 'stmtfailed') {
-        func.setMsg('signupForm', 'error', 'Er is iets fout gegaan, probeer het later opnieuw!', urlError);
+        return {
+            pass: false,
+            error: "Er is iets fout gegaan, probeer het later opnieuw!"
+        };
     }
-}
 
-// Check everything again before submitting to PHP
-elForm.addEventListener('submit', function(e) {
-    let error;
-    let elements = [elFirstname, elLastname, elUsername, elEmail, elPwd, elPwdRepeat];
-    elements.forEach(element => {
-        if (func.emptyInput(element.id) !== false) {
-            func.setMsg(element.id, 'error', 'Verplicht veld!', urlError);
-            error = true;
+    return {
+        pass: true
+    };
+});
+
+// start of form validator
+const fv = new FromValidator('#signupForm');
+
+fv.register('#signupFirstname', (value, inputField) => {
+    if (fv.emptyInput(inputField) !== false)  {
+        return {
+            pass: false,
+            error: "Vul een voornaam in!"
+        };
+    }
+    if (fv.maxChars(value, 128) !== false)  {
+        return {
+            pass: false,
+            error: "Voornaam mag niet langer zijn dan 128 karakters!"
+        };
+    }
+
+    return {
+        pass: true
+    };
+});
+
+fv.register('#signupMiddlename', (value, inputField) => {
+    if (fv.maxChars(value, 128) !== false)  {
+        return {
+            pass: false,
+            error: "Tussenvoegsel mag niet langer zijn dan 128 karakters!"
+        };
+    }
+
+    return {
+        pass: true
+    };
+});
+
+fv.register('#signupLastname', (value, inputField) => {
+    if (fv.emptyInput(inputField) !== false)  {
+        return {
+            pass: false,
+            error: "Vul een achternaam in!"
+        };
+    }
+    if (fv.maxChars(value, 128) !== false)  {
+        return {
+            pass: false,
+            error: "Achternaam mag niet langer zijn dan 128 karakters!"
+        };
+    }
+
+    return {
+        pass: true
+    };
+});
+
+fv.register('#signupUsername', (value, inputField) => {
+    if (fv.emptyInput(inputField) !== false)  {
+        return {
+            pass: false,
+            error: "Vul een gebruikersnaam in!"
+        };
+    }
+    if (fv.maxChars(value, 128) !== false)  {
+        return {
+            pass: false,
+            error: "Gebruikersnaam mag niet langer zijn dan 128 karakters!"
+        };
+    }
+    if (fv.validateUsername(inputField) !== false) {
+        return {
+            pass: false,
+            error: "Gebruik alleen letters, cijfers en - of _!"
+        };
+    }
+
+    return {
+        pass: true
+    };
+});
+
+fv.register('#signupEmail', (value, inputField) => {
+    if (fv.emptyInput(inputField) !== false)  {
+        return {
+            pass: false,
+            error: "Vul een e-mail in!"
+        };
+    }
+    if (fv.maxChars(value, 128) !== false)  {
+        return {
+            pass: false,
+            error: "E-mail mag niet langer zijn dan 128 karakters!"
+        };
+    }
+    if (fv.validateEmail(inputField) !== false) {
+        return {
+            pass: false,
+            error: "Vul een geldige e-mail in!"
         }
-    });
-
-    // After check for empty fields
-    if (func.validateUsername('signupUsername') !== false) {
-        func.setMsg('signupUsername', 'error', 'Gebruik alleen letters, cijfers en - of _!', urlError);
-        error = true;
     }
 
-    if (func.validateEmail('signupEmail') !== false) {
-        func.setMsg('signupEmail', 'error', DOMPurify.sanitize(elEmail.value) + ' is geen geldige e-mail!', urlError);
-        error = true;
+    return {
+        pass: true
+    };
+});
+
+fv.register('#signupPwd', (value, inputField) => {
+    if (fv.emptyInput(inputField) !== false)  {
+        return {
+            pass: false,
+            error: "Vul een wachtwoord in!"
+        };
+    }
+    if (fv.maxChars(value, 256) !== false)  {
+        return {
+            pass: false,
+            error: "Wachtwoord mag niet langer zijn dan 256 karakters!"
+        };
     }
 
-    if (func.validatePwd('signupPwd' ,'signupPwdRepeat') !== false) {
-        func.setMsg('signupForm', 'error', 'Wachtwoorden komen niet overeen!', urlError);
-        error = true;
+    return {
+        pass: true
+    };
+});
+
+fv.register('#signupPwdRepeat', (value, inputField) => {
+    if (fv.emptyInput(inputField) !== false)  {
+        return {
+            pass: false,
+            error: "Herhaal het gekozen wachtwoord!"
+        };
     }
-    if (error === true) {
-        e.preventDefault();
+    if (fv.maxChars(value, 256) !== false)  {
+        return {
+            pass: false,
+            error: "Wachtwoord mag niet langer zijn dan 256 karakters!"
+        };
     }
-}, false);
+    if (fv.validatePwd('#signupPwd', inputField.id) !== false) {
+        return {
+            pass: false,
+            error: "Wachtwoorden komen niet overeen!"
+        };
+    }
+
+    return {
+        pass: true
+    };
+});
+

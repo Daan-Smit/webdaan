@@ -5,19 +5,23 @@ include '../includes/main.inc.php';
 ?>
 
 <div class="container">
-    <form action="../includes/login/login.inc.php" method="post" id="loginForm" class="needs-validation" novalidate>
-        <h2>Login</h2>
-
-        <input type="text" name="name" required class='form-control' id="loginName" autocomplete="off" placeholder="Gebruikersnaam/Email..." value="<?= $_SESSION['temp_login'] ?? "" ?>">
-        <div id="loginNameMsg"></div>
-
-        <input type="password" name="pwd" id="loginPwd" autocomplete="off" placeholder="Wachtwoord...">
-        <div id="loginPwdMsg"></div>
+    <form action="../includes/login/login.inc.php" method="post" id="loginForm">
+        <h2>Inloggen</h2>
+        <div class="input">
+            <label for="loginName" class="input__label">Gebruikersnaam/Email</label>
+            <input type="text" id="loginName" name="name" class="input__input" autocomplete="off" value="<?= $_SESSION['temp_login'] ?? "" ?>">
+            <div class="input__error"></div>
+        </div>
+        <div class="input">
+            <label for="loginPwd" class="input__label">Wachtwoord</label>
+            <input type="password" id="loginPwd" name="pwd" class="input__input" autocomplete="off">
+            <div class="input__error"></div>
+        </div>
 
         <button type="submit" name="submit">Inloggen</button>
         <a href="signup.php">Account aanmaken</a>
     </form>
-    <div id="loginFormMsg"></div>
+    <div id="serverError"></div>
 </div>
 <script type="module" src="js/login.js"></script>
 

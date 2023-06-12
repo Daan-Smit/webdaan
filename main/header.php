@@ -9,7 +9,7 @@
           <a class="nav-link customLink" href="<?= $path ?>">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link customLink" href="<?= $path . '' ?>">Portfolio</a>
+          <a class="nav-link customLink" href="<?= $path . 'portfolio/portfolio.php' ?>">Portfolio</a>
         </li>
         <li class="nav-item">
           <a class="nav-link customLink" href="<?= $path . '' ?>">Recepten</a>
@@ -62,7 +62,7 @@
   <div class="offcanvas-body mx-3 mb-3">
     <div class="d-flex flex-column bd-highlight">
       <a href="<?= $path ?>" class="py-2 customLink">Home</a>
-      <a href="<?= $path . '' ?>" class="py-2 customLink">Portfolio</a>
+      <a href="<?= $path . 'portfolio/portfolio.php' ?>" class="py-2 customLink">Portfolio</a>
       <a href="<?= $path . ''?>" class="py-2 customLink">Recepten</a>
       <hr class="bg-main">
 

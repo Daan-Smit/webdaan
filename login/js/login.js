@@ -1,65 +1,77 @@
-import * as func from './functions.js';
-import {emptyInput, validateEmail} from "./functions.js";
+import FromValidator from "../../js/FormValidator.js";
+import ServerValidator from "../../js/ServerValidator.js";
 
-// Initialize variables
-let elName, elPwd, elForm, urlError;
-elName = document.getElementById('loginName');
-elPwd = document.getElementById('loginPwd');
-elForm = document.getElementById('loginForm');
-urlError = func.checkUrl('error');
+// start of server validator
+const sv = new ServerValidator('error');
 
-// If there is a URL parameter first fill in these error messages
-if (urlError) {
-    // Get url param called 'error'
-    const url = window.location.search;
-    const urlParams = new URLSearchParams(url);
-    const errorName = urlParams.get('error');
-
-    // Set message depending on the error value
+sv.setError('#serverError', errorName => {
     if (errorName === 'emptyinput') {
-        func.setMsg(elForm, 'error', 'Vul alle velden in!', urlError);
-    }
-    if (errorName === 'wronglogin') {
-        func.setMsg(elForm, 'error', 'Verkeerde login gegevens!', urlError);
+        return {
+            pass: false,
+            error: "Vul alle velden in!"
+        };
     }
     if (errorName === 'nouser') {
-        func.setMsg(elName, 'error', DOMPurify.sanitize(elName.value) + ' bestaat niet!', urlError);
+        return {
+            pass: false,
+            error: "Geen gebruiker gevonden!"
+        };
+    }
+    if (errorName === 'wronglogin') {
+        return {
+            pass: false,
+            error: "Inlog gegevens zijn incorrect!"
+        };
     }
     if (errorName === 'stmtfailed') {
-        func.setMsg(elForm, 'error', 'Er is iets fout gegaan, probeer het later opnieuw!', urlError);
-    }
-}
-
-elName.addEventListener('blur', function() {
-    if (emptyInput(elName) !== false) {
-        func.setMsg(elName, 'error', 'Vul een gebruikersnaam of e-mail in!', urlError);
-        return;
-    }
-    if (validateEmail(elName) !== false) {
-        func.setMsg(elName, 'error', DOMPurify.sanitize(elName.value) + ' is geen geldige e-mail!', urlError);
-        return;
+        return {
+            pass: false,
+            error: "Er is iets fout gegaan, probeer het later opnieuw!"
+        };
     }
 
-    func.unsetMsg(elName, urlError);
-}, false)
+    return {
+        pass: true
+    };
+});
 
-elPwd.addEventListener('blur', function() {
-    if (emptyInput(elPwd) !== false) {
-        func.setMsg(elPwd, 'error', 'Vul een wachtwoord in!', urlError);
-        return;
-    }
-    func.unsetMsg(elPwd, urlError);
-}, false)
+// start of form validator
+const fv = new FromValidator('#loginForm');
 
-// Check everything again before submitting to PHP
-elForm.addEventListener('submit', function(e) {
-    if (func.emptyInput(elName) !== false) {
-        func.setMsg(elName, 'error', 'Vul een gebruikersnaam of e-mail in!', urlError);
-        e.preventDefault();
-        return;
+fv.register('#loginName', (value, inputField) => {
+    if (fv.emptyInput(inputField) !== false)  {
+       return {
+           pass: false,
+           error: "Vul een gebruikersnaam of e-mail in!"
+       };
     }
-    if (func.emptyInput(elPwd) !== false) {
-        func.setMsg(elPwd, 'error', 'Vul een wachtwoord in!', urlError);
-        e.preventDefault();
+    if (fv.validateEmail(inputField) !== false)  {
+        return {
+            pass: false,
+            error: DOMPurify.sanitize(value) + " is geen geldige e-mail!"
+        };
     }
-}, false);
+    if (fv.validateUsername(inputField) !== false)  {
+        return {
+            pass: false,
+            error: DOMPurify.sanitize(value) + " is geen geldige gebruikersnaam! Gebruik alleen letters, cijfers en - of _!"
+        };
+    }
+
+    return {
+       pass: true
+    };
+});
+
+fv.register('#loginPwd', (value, inputField) => {
+    if (fv.emptyInput(inputField) !== false)  {
+        return {
+            pass: false,
+            error: "Vul een wachtwoord in!"
+        };
+    }
+
+    return {
+        pass: true
+    };
+});

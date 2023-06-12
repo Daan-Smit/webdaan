@@ -60,8 +60,8 @@ export function validateEmail(element) {
 
 export function validateUsername(element) {
     let el = element;
-    const emailRegex =  /^[a-zA-Z0-9-_]*$/;
-    return !emailRegex.test(el.value);
+    const usernameRegex =  /^[a-zA-Z0-9-_]*$/;
+    return !usernameRegex.test(el.value);
 }
 
 export function validatePwd(password, passwordRepeat) {
